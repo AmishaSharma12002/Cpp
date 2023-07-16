@@ -7,19 +7,23 @@ struct Node {
 
 Node* removeLastNode(struct Node* head)
 {
-	if (head == NULL)
-		return NULL;
-	if (head->next == NULL) {
-		delete head;
-		return NULL;
-	}
-	Node* second_last = head;
-	while (second_last->next->next != NULL)
-		second_last = second_last->next;
-	delete (second_last->next);
-	second_last->next = NULL;
+     if (head == NULL || head->next == NULL) {
+        delete head;
+        return NULL;
+    }
 
-	return head;
+    Node* curr = head;
+    Node* prev = NULL;
+
+    while (curr->next != NULL) {
+        prev = curr;
+        curr = curr->next;
+    }
+
+    delete curr;
+    prev->next = NULL;
+
+    return head;
 }
 
 void push(struct Node** head_ref, int new_data)
